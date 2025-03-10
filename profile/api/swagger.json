@@ -1,0 +1,915 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BoardBox",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/games": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Searches existing games by provided parameters",
+        "parameters": [
+          {
+            "name": "namePattern",
+            "in": "query",
+            "description": "A substring that should be contained within game name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "genres",
+            "in": "query",
+            "description": "A list of genres that the game should have",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GameGenreDto"
+              }
+            }
+          },
+          {
+            "name": "playerCounts",
+            "in": "query",
+            "description": "A list of player counts that the game should have",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "minAverageDuration",
+            "in": "query",
+            "description": "A minimum average duration that the game should have",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "maxAverageDuration",
+            "in": "query",
+            "description": "A maximum average duration that the game should have",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Creates a game",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          },
+          "403": {
+            "description": "User does not have permissions to create a game"
+          }
+        }
+      }
+    },
+    "/api/games/suggestions": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Use AI search to generate game suggestions based on current user preferences",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          }
+        }
+      }
+    },
+    "/api/games/{gameId}": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Finds a game by id",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "description": "Id of the game",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/api/games/{gameId}/rules/description": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Use AI to describe game rules",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeGameResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeGameResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeGameResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/api/games/{gameId}/rules/question": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "Use AI to answer question about game rules",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesQuestionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesQuestionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RulesQuestionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User token not provided"
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/api/collections": {
+      "get": {
+        "tags": [
+          "GameCollection"
+        ],
+        "summary": "Returns all game collections for current user",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameCollectionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameCollectionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameCollectionDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No user token provider"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GameCollection"
+        ],
+        "summary": "Creates a new game collection for current user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameCollectionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameCollectionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameCollectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCollectionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCollectionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCollectionDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No user token provider"
+          }
+        }
+      }
+    },
+    "/api/collections/{collectionId}/games": {
+      "get": {
+        "tags": [
+          "GameCollection"
+        ],
+        "summary": "List games in the collection",
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No user token provider"
+          },
+          "403": {
+            "description": "Selected game collections does not belong to current user"
+          },
+          "404": {
+            "description": "Game collection not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GameCollection"
+        ],
+        "summary": "Adds games to selected game collection",
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddGamesToCollectionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddGamesToCollectionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddGamesToCollectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "No user token provider"
+          },
+          "403": {
+            "description": "Selected game collections does not belong to current user"
+          },
+          "404": {
+            "description": "Game collection not found"
+          },
+          "409": {
+            "description": "Some games are already in collection"
+          }
+        }
+      }
+    },
+    "/api/collections/{collectionId}/games/{gameId}": {
+      "delete": {
+        "tags": [
+          "GameCollection"
+        ],
+        "summary": "Removes game from collection",
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "No user token provider"
+          },
+          "403": {
+            "description": "Selected game collections does not belong to current user"
+          },
+          "404": {
+            "description": "Game is not in collection, or game collection not found"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Gets current user information",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No user token provider"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Updates current user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No user token provider"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddGamesToCollectionRequest": {
+        "required": [
+          "game_ids"
+        ],
+        "type": "object",
+        "properties": {
+          "game_ids": {
+            "maxItems": 2147483647,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateGameCollectionRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maximum": 100,
+            "minimum": 3,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateGameRequest": {
+        "required": [
+          "attributes",
+          "average_duration_hours",
+          "genre",
+          "name",
+          "player_count"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "player_count": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "average_duration_hours": {
+            "type": "number",
+            "format": "float"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/GameGenreDto"
+          },
+          "attributes": {}
+        },
+        "additionalProperties": false
+      },
+      "DescribeGameResponse": {
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GameCollectionDto": {
+        "required": [
+          "id",
+          "name",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "maximum": 100,
+            "minimum": 3,
+            "minLength": 1,
+            "type": "string"
+          },
+          "user_id": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GameDto": {
+        "required": [
+          "attributes",
+          "average_duration_hours",
+          "genre",
+          "id",
+          "name",
+          "player_count"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "player_count": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "average_duration_hours": {
+            "type": "number",
+            "format": "float"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/GameGenreDto"
+          },
+          "attributes": {}
+        },
+        "additionalProperties": false
+      },
+      "GameGenreDto": {
+        "enum": [
+          "EuroGames",
+          "AmeriTrash",
+          "DeckBuilding",
+          "RollAndMove",
+          "Drafting",
+          "Cooperative",
+          "SetCollection",
+          "WorkerPlacement",
+          "SocialDeduction",
+          "PartyGames",
+          "LegacyGames",
+          "Fantasy",
+          "ScienceFiction",
+          "Historical",
+          "Detective",
+          "Horror",
+          "Economic"
+        ],
+        "type": "string"
+      },
+      "RulesQuestionResponse": {
+        "required": [
+          "answer"
+        ],
+        "type": "object",
+        "properties": {
+          "answer": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDto": {
+        "required": [
+          "display_name",
+          "id",
+          "login"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+          },
+          "login": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "display_name": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@startuml
+
+enum game_genre {
+    + eurogames  
+    + ameritrash  
+    + deckbuilding  
+    + roll_and_move  
+    + drafting  
+    + cooperative  
+    + set_collection  
+    + worker_placement  
+    + social_deduction  
+    + party_games  
+    + legacy_games  
+    + fantasy  
+    + science_fiction  
+    + historical  
+    + detective  
+    + horror  
+    + economic  
+}
+
+entity games {
+    + bigserial game_id
+    + text game_name
+    + text game_description
+    + int game_player_count
+    + float game_average_duration
+    + game_genre game_genre
+    + jsonb game_attributes
+}
+
+entity users {
+    + bigserial user_id
+    + text user_login
+    + text user_display_name
+}
+
+entity game_collection {
+    + bigserial game_collection_id
+    + text game_collection_name
+    + bigint user_id
+}
+
+entity game_collection_entries {
+    + bigint game_collection_id
+    + bigint game_id
+}
+
+game_genre -right-* games
+
+games -right-{ game_collection_entries
+game_collection_entries }-right- game_collection
+
+game_collection }-right- users
+
+@enduml
