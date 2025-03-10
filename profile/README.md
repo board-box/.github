@@ -2,6 +2,12 @@
 
 ## Приложение помогает разобраться в правилах и подобрать настольные игры
 
+## Участники:
+* [Георгий Круглов](https://t.me/ronimizy) - teamLead, devops
+* [Даниил Частухин](https://t.me/Dadypool) - back-end
+* [Анастасия Аверьянова](https://t.me/nastasia22av) - front-end, design
+* [Дмитрий Дзюба](https://t.me/jetterro) - tech writer, business analyst 
+
 ### [Подробное описание](https://docs.google.com/document/d/1vdSPcaU3Bp6Qdrfr5rcl3748hgAHZfkoPny65yN-GPQ/edit?usp=sharing)
 
 ### [Таск-трекер](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
