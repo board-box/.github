@@ -1,16 +1,26 @@
-# BoardBox. Помощник по настольным играм
+# BoardBox
 
-## Приложение помогает разобраться в правилах и подобрать настольные игры
+## Тема: 
 
-## Участники:
-* [Георгий Круглов](https://t.me/ronimizy) - teamLead, devops
-* [Даниил Частухин](https://t.me/Dadypool) - back-end
-* [Анастасия Аверьянова](https://t.me/nastasia22av) - front-end, design
-* [Дмитрий Дзюба](https://t.me/jetterro) - tech writer, business analyst 
+Помощник по настольным играм
+
+## Описание сервиса: 
+
+Приложение помогает разобраться в правилах и подобрать настольные игры
 
 ### [Подробное описание](https://docs.google.com/document/d/1vdSPcaU3Bp6Qdrfr5rcl3748hgAHZfkoPny65yN-GPQ/edit?usp=sharing)
 
-### [Таск-трекер](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
+## Участники:
+* [Георгий Круглов](https://t.me/ronimizy) - teamLead, devops
+* [Даниил Частухин](https://t.me/Dadypool) - back-end, project-manager
+* [Анастасия Аверьянова](https://t.me/nastasia22av) - front-end, design
+* [Дмитрий Дзюба](https://t.me/jetterro) - tech writer, business analyst
+
+## Документация:
+* [Техническое задание](https://docs.google.com/document/d/1tNMom6kyIaroqhRAxUr_2aVuckEfT9vnbBC6LYLwb6E/edit?usp=sharing)
+
+### Сервисы командной разработки:
+* [Jira](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
 
 ### Основной сценарий использования:
 * Регистрация и создание профиля: Пользователь регистрируется, создаёт профиль и добавляет игры в свою коллекцию.
