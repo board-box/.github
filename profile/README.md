@@ -21,6 +21,7 @@
 
 ### Сервисы командной разработки:
 * [Jira](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
+* [API](https://board-box.redocly.app/openapi)
 
 ### Основной сценарий использования:
 * Регистрация и создание профиля: Пользователь регистрируется, создаёт профиль и добавляет игры в свою коллекцию.
