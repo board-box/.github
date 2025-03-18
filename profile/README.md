@@ -17,7 +17,7 @@
 * [Дмитрий Дзюба](https://t.me/jetterro) - tech writer, business analyst
 
 ## Документация:
-* [Техническое задание](https://docs.google.com/document/d/1tNMom6kyIaroqhRAxUr_2aVuckEfT9vnbBC6LYLwb6E/edit?usp=sharing)
+* [Техническое задание](documentation/TechnicalSpecification.pdf)
 
 ### Сервисы командной разработки:
 * [Jira](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
