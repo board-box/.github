@@ -11,17 +11,18 @@
 ### [Подробное описание](https://docs.google.com/document/d/1vdSPcaU3Bp6Qdrfr5rcl3748hgAHZfkoPny65yN-GPQ/edit?usp=sharing)
 
 ## Участники:
-* [Георгий Круглов](https://t.me/ronimizy) - teamLead, devops
-* [Даниил Частухин](https://t.me/Dadypool) - back-end, project-manager
+* [Даниил Частухин](https://t.me/Dadypool) - teamLead, back-end 
+* [Георгий Круглов](https://t.me/ronimizy) - devops, project-manager
 * [Анастасия Аверьянова](https://t.me/nastasia22av) - front-end, design
 * [Дмитрий Дзюба](https://t.me/jetterro) - tech writer, business analyst
 
 ## Документация:
-* [Техническое задание](documentation/TechnicalSpecification.pdf)
+* [Техническое задание](documentation/ТЗ.pdf)
 
 ### Сервисы командной разработки:
 * [Jira](https://duddypool.atlassian.net/jira/software/projects/BOARD/boards/1)
 * [API](https://board-box.redocly.app/openapi)
+* [Макеты](https://www.figma.com/design/IXi6mKW4Rq0gZnHoPrpZZ6/BoardBox?node-id=0-1&p=f&t=CeHHIhjAoQ79hC9g-0)
 
 ### Основной сценарий использования:
 * Регистрация и создание профиля: Пользователь регистрируется, создаёт профиль и добавляет игры в свою коллекцию.
